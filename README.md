@@ -135,6 +135,10 @@ License
 This library is released under the GNU Lesser General Public 
 License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl.html).
 
+Release 0.0.9 - Release Notes
+-------
+* Fixed NPE in httpClient.getParams
+
 Release 0.0.8 - Release Notes
 -------
 * Fixed thread safety issue with `SimpleDateFormat`, create a new one each time.
