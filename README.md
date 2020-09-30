@@ -1,7 +1,7 @@
 Lutung - Java Mandrill API
 ======
 
-NOTE: this project is no longer maintained.
+NOTE: This project is a fork since the original project no longer maintained.
 
 Lutung - a Java interface to the [Mandrill](http://www.mandrill.com/) API. 
 Check out Mandrill's API [Documentation]
@@ -24,7 +24,7 @@ Features:
 
 Installation
 ------------
-If you're using Maven, just add this [dependency](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.mandrillapp.wrapper.lutung%22%20AND%20a%3A%22lutung%22) to your pom.xml:
+If you're using Maven, just add this [dependency](https://search.maven.org/search?q=g:io.github.dnovitski%20AND%20a:lutung) to your pom.xml:
 ```
 <dependency>
     <groupId>io.github.dnovitski</groupId>
@@ -137,7 +137,9 @@ License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl
 
 Release 0.0.9 - Release Notes
 -------
-* Fixed NPE in httpClient.getParams
+* Forked project under new groupid: io.github.dnotivski
+* Fixed NPE in httpClient.getParams due to modern httpclient
+* Prevent NPE if response does not exist in MandrillRequestDispatcher.java
 
 Release 0.0.8 - Release Notes
 -------
