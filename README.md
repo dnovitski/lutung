@@ -27,9 +27,9 @@ Installation
 If you're using Maven, just add this [dependency](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.mandrillapp.wrapper.lutung%22%20AND%20a%3A%22lutung%22) to your pom.xml:
 ```
 <dependency>
-    <groupId>com.mandrillapp.wrapper.lutung</groupId>
+    <groupId>io.github.dnovitski</groupId>
     <artifactId>lutung</artifactId>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
 </dependency>
 ```
 If you're not using Maven, see [Dependencies](#dependencies) below.
