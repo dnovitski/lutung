@@ -128,7 +128,9 @@ public final class MandrillRequestDispatcher {
 				
 		} finally {
 			try {
-				EntityUtils.consume(response.getEntity());
+				if (response != null) {
+					EntityUtils.consume(response.getEntity());
+				}
 			} catch (IOException e) {
 				log.error("Error consuming entity", e);
 				throw e;
