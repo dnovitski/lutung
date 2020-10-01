@@ -137,7 +137,7 @@ License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl
 
 Release 0.0.9 - Release Notes
 -------
-* Forked project under new groupid: io.github.dnotivski
+* Forked project under new groupid: io.github.dnovitski
 * Fixed NPE in httpClient.getParams due to modern httpclient
 * Prevent NPE if response does not exist in MandrillRequestDispatcher.java
 
