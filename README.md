@@ -29,7 +29,7 @@ If you're using Maven, just add this [dependency](https://search.maven.org/searc
 <dependency>
     <groupId>io.github.dnovitski</groupId>
     <artifactId>lutung</artifactId>
-    <version>0.0.9</version>
+    <version>0.0.10</version>
 </dependency>
 ```
 If you're not using Maven, see [Dependencies](#dependencies) below.
