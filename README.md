@@ -135,6 +135,10 @@ License
 This library is released under the GNU Lesser General Public 
 License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl.html).
 
+Release 0.0.19 - Release Notes
+-------
+* Fixed CVE CVE-2020-13956
+
 Release 0.0.9 - Release Notes
 -------
 * Forked project under new groupid: io.github.dnovitski
