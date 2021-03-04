@@ -135,7 +135,7 @@ License
 This library is released under the GNU Lesser General Public 
 License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl.html).
 
-Release 0.0.19 - Release Notes
+Release 0.0.10 - Release Notes
 -------
 * Fixed CVE CVE-2020-13956
 
