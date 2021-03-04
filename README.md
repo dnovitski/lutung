@@ -29,7 +29,7 @@ If you're using Maven, just add this [dependency](https://search.maven.org/searc
 <dependency>
     <groupId>io.github.dnovitski</groupId>
     <artifactId>lutung</artifactId>
-    <version>0.0.10</version>
+    <version>0.0.11</version>
 </dependency>
 ```
 If you're not using Maven, see [Dependencies](#dependencies) below.
@@ -134,6 +134,14 @@ License
 -------
 This library is released under the GNU Lesser General Public 
 License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl.html).
+
+Release 0.0.11 - Release Notes
+-------
+* Add support for configurable client timeouts. These can be configured via Java system properties (eg passing `-Dxxx=yyy` to the JVM args):
+  * `mandrill.socket.timeout` (socket timeout in millis, default `5000`)
+  * `mandrill.connection.timeout` (connection timeout in millis, default `5000`)
+  * `mandrill.socket.linger.timeout` (socket linger timeout in seconds, default `0`)
+* Default timeouts have been changed from no timeout to a more sensible default timeout described above to prevent the HTTP client from blocking indefinitely
 
 Release 0.0.10 - Release Notes
 -------
