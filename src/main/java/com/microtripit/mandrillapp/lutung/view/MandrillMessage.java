@@ -1,9 +1,10 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +17,9 @@ public class MandrillMessage {
 	private String subject, html, text, from_email, from_name;
 	private List<Recipient> to;
 	private Map<String,String> headers;
-	private Boolean important, track_opens, track_clicks, auto_text, auto_html, 
+	private Boolean important, track_opens, track_clicks, auto_text, auto_html,
 			inline_css, url_strip_qs, preserve_recipients, view_content_link;
-	private String bcc_address, tracking_domain, signing_domain, 
+	private String bcc_address, tracking_domain, signing_domain,
 			return_path_domain;
 	private Boolean merge;
 	private String merge_language;
@@ -33,8 +34,8 @@ public class MandrillMessage {
 	private List<MessageContent> attachments;
 	private List<MessageContent> images;
 	// following params are send-only
-	
-	
+
+
 	/**
 	 * @return The message subject.
 	 */
@@ -118,10 +119,10 @@ public class MandrillMessage {
 	public void setTo(final List<Recipient> to) {
 		this.to = to;
 	}
-	
+
 	/**
-	 * @return Optional extra headers to add to the 
-	 * message (currently only Reply-To and X-* headers 
+	 * @return Optional extra headers to add to the
+	 * message (currently only Reply-To and X-* headers
 	 * are allowed).
 	 */
 	public Map<String,String> getHeaders() {
@@ -129,8 +130,8 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param headers Optional extra headers to add to the 
-	 * message (currently only Reply-To and X-* headers 
+	 * @param headers Optional extra headers to add to the
+	 * message (currently only Reply-To and X-* headers
 	 * are allowed)
 	 */
 	public void setHeaders(final Map<String,String> headers) {
@@ -164,17 +165,17 @@ public class MandrillMessage {
 	public void setImages(final List<MessageContent> images) {
 		this.images = images;
 	}
-	
+
 	/**
-	 * @return Whether or not this message is important, and should be 
+	 * @return Whether or not this message is important, and should be
 	 * delivered ahead of non-important messages.
 	 */
 	public Boolean getImportant() {
 		return important;
 	}
-	
+
 	/**
-	 * @param important Set whether or not this message is important, and 
+	 * @param important Set whether or not this message is important, and
 	 * should be delivered ahead of non-important messages
 	 */
 	public void setImportant(final Boolean important) {
@@ -182,7 +183,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return Whether or not to turn on open tracking 
+	 * @return Whether or not to turn on open tracking
 	 * for the message.
 	 */
 	public Boolean getTrackOpens() {
@@ -190,7 +191,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param trackOpens Whether or not to turn on open 
+	 * @param trackOpens Whether or not to turn on open
 	 * tracking for the message.
 	 */
 	public void setTrackOpens(final Boolean trackOpens) {
@@ -198,7 +199,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	* @return Whether or not to turn on click tracking 
+	* @return Whether or not to turn on click tracking
 	* for the message.
 	*/
 	public Boolean getTrackClicks() {
@@ -206,7 +207,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param trackClicks Whether or not to turn on click tracking 
+	 * @param trackClicks Whether or not to turn on click tracking
 	* for the message.
 	 */
 	public void setTrackClicks(final Boolean trackClicks) {
@@ -214,7 +215,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return Whether or not to automatically generate a 
+	 * @return Whether or not to automatically generate a
 	 * text part for messages that are not given text.
 	 */
 	public Boolean getAutoText() {
@@ -222,7 +223,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param autoText Whether or not to automatically generate a 
+	 * @param autoText Whether or not to automatically generate a
 	 * text part for messages that are not given text.
 	 */
 	public void setAutoText(final Boolean autoText) {
@@ -230,7 +231,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return Whether or not to automatically generate an 
+	 * @return Whether or not to automatically generate an
 	 * HTML part for messages that are not given HTML.
 	 */
 	public Boolean getAutoHtml() {
@@ -238,7 +239,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param autoHtml Whether or not to automatically generate an 
+	 * @param autoHtml Whether or not to automatically generate an
 	 * HTML part for messages that are not given HTML.
 	 */
 	public void setAutoHtml(final Boolean autoHtml) {
@@ -246,8 +247,8 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return Whether or not to automatically inline all CSS styles 
-	 * provided in the message HTML &ndash; only for HTML documents less 
+	 * @return Whether or not to automatically inline all CSS styles
+	 * provided in the message HTML &ndash; only for HTML documents less
 	 * than 256KB in size.
 	 */
 	public Boolean getInlineCss() {
@@ -255,8 +256,8 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param inlineCss Whether or not to automatically inline all CSS 
-	 * styles provided in the message HTML &ndash; only for HTML 
+	 * @param inlineCss Whether or not to automatically inline all CSS
+	 * styles provided in the message HTML &ndash; only for HTML
 	 * documents less than 256KB in size.
 	 */
 	public void setInlineCss(final Boolean inlineCss) {
@@ -264,7 +265,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return Whether or not to strip the query string 
+	 * @return Whether or not to strip the query string
 	 * from URLs when aggregating tracked URL data.
 	 */
 	public Boolean getUrlStripQs() {
@@ -272,7 +273,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param urlStripQs Whether or not to strip the query string 
+	 * @param urlStripQs Whether or not to strip the query string
 	 * from URLs when aggregating tracked URL data.
 	 */
 	public void setUrlStripQs(final Boolean urlStripQs) {
@@ -280,7 +281,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return Whether or not to expose all recipients in 
+	 * @return Whether or not to expose all recipients in
 	 * to "To" header for each email.
 	 */
 	public Boolean getPreserveRecipients() {
@@ -288,23 +289,23 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param preserveRecipients Whether or not to expose all 
+	 * @param preserveRecipients Whether or not to expose all
 	 * recipients in the "To" header for each email.
 	 */
 	public void setPreserveRecipients(final Boolean preserveRecipients) {
 		this.preserve_recipients = preserveRecipients;
 	}
-	
+
 	/**
-	 * @return False if you want to remove content logging for 
+	 * @return False if you want to remove content logging for
 	 * sensitive emails.
 	 */
 	public Boolean getViewContentLink() {
 		return view_content_link;
 	}
-	
+
 	/**
-	 * @param view_content_link Set to false to remove content logging for 
+	 * @param view_content_link Set to false to remove content logging for
 	 * sensitive emails.
 	 */
 	public void setViewContentLink(final Boolean view_content_link) {
@@ -312,7 +313,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return An optional address to receive an exact copy of 
+	 * @return An optional address to receive an exact copy of
 	 * each recipient's email.
 	 */
 	public String getBcc() {
@@ -320,7 +321,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param email An optional address to receive an 
+	 * @param email An optional address to receive an
 	 * exact copy of each recipient's email.
 	 */
 	public void setBcc(final String email) {
@@ -328,7 +329,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return A custom domain to use for tracking opens 
+	 * @return A custom domain to use for tracking opens
 	 * and clicks instead of mandrillapp.com.
 	 */
 	public String getTrackingDomain() {
@@ -336,7 +337,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param trackingDomain The custom domain to use for tracking 
+	 * @param trackingDomain The custom domain to use for tracking
 	 * opens and clicks instead of mandrillapp.com.
 	 */
 	public void setTrackingDomain(final String trackingDomain) {
@@ -344,7 +345,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return A custom domain to use for SPF/DKIM signing instead of 
+	 * @return A custom domain to use for SPF/DKIM signing instead of
 	 * mandrill (for "via" or "on behalf of" in email clients).
 	 */
 	public String getSigningDomain() {
@@ -352,23 +353,23 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param signingDomain The custom domain to use for SPF/DKIM 
-	 * signing instead of mandrill (for "via" or "on behalf of" 
+	 * @param signingDomain The custom domain to use for SPF/DKIM
+	 * signing instead of mandrill (for "via" or "on behalf of"
 	 * in email clients).
 	 */
 	public void setSigningDomain(final String signingDomain) {
 		this.signing_domain = signingDomain;
 	}
-	
+
 	/**
 	 * @return The custom domain to use for the messages's return-path.
 	 */
 	public String getReturnPathDomain() {
 		return return_path_domain;
 	}
-	
+
 	/**
-	 * @param return_path_domain A custom domain to use for the 
+	 * @param return_path_domain A custom domain to use for the
 	 * messages's return-path.
 	 */
 	public void setReturnPathDomain(final String return_path_domain) {
@@ -405,7 +406,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return The global merge variables to use for all recipients. 
+	 * @return The global merge variables to use for all recipients.
 	 * You can override these per recipient.
 	 */
 	public List<MergeVar> getGlobalMergeVars() {
@@ -413,7 +414,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param globalMergeVars The global merge variables to use for 
+	 * @param globalMergeVars The global merge variables to use for
 	 * all recipients. You can override these per recipient.
 	 */
 	public void setGlobalMergeVars(final List<MergeVar> globalMergeVars) {
@@ -421,7 +422,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return The per-recipient merge variables, which override 
+	 * @return The per-recipient merge variables, which override
 	 * global merge variables with the same name.
 	 */
 	public List<MergeVarBucket> getMergeVars() {
@@ -429,7 +430,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param mergeVars The per-recipient merge variables, which override 
+	 * @param mergeVars The per-recipient merge variables, which override
 	 * global merge variables with the same name.
 	 */
 	public void setMergeVars(final List<MergeVarBucket> mergeVars) {
@@ -437,11 +438,11 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return An array of string to tag the message with. Stats 
-	 * are accumulated using tags, though we only store the first 
-	 * 100 we see, so this should not be unique or change frequently. 
-	 * Tags should be 50 characters or less. Any tags starting with 
-	 * an underscore are reserved for internal use and will cause 
+	 * @return An array of string to tag the message with. Stats
+	 * are accumulated using tags, though we only store the first
+	 * 100 we see, so this should not be unique or change frequently.
+	 * Tags should be 50 characters or less. Any tags starting with
+	 * an underscore are reserved for internal use and will cause
 	 * errors.
 	 */
 	public List<String> getTags() {
@@ -449,47 +450,45 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param tags An array of string to tag the message with. Stats 
-	 * are accumulated using tags, though we only store the first 
-	 * 100 we see, so this should not be unique or change frequently. 
-	 * Tags should be 50 characters or less. Any tags starting with 
-	 * an underscore are reserved for internal use and will cause 
+	 * @param tags An array of string to tag the message with. Stats
+	 * are accumulated using tags, though we only store the first
+	 * 100 we see, so this should not be unique or change frequently.
+	 * Tags should be 50 characters or less. Any tags starting with
+	 * an underscore are reserved for internal use and will cause
 	 * errors.
 	 */
 	public void setTags(final List<String> tags) {
 		this.tags = tags;
 	}
-	
+
 	/**
-	 * @param tags Strings to tag the message with. Stats 
-	 * are accumulated using tags, though we only store the first 
-	 * 100 we see, so this should not be unique or change frequently. 
-	 * Tags should be 50 characters or less. Any tags starting with 
-	 * an underscore are reserved for internal use and will cause 
+	 * @param tags Strings to tag the message with. Stats
+	 * are accumulated using tags, though we only store the first
+	 * 100 we see, so this should not be unique or change frequently.
+	 * Tags should be 50 characters or less. Any tags starting with
+	 * an underscore are reserved for internal use and will cause
 	 * errors.
 	 */
 	public void setTags(final String... tags) {
-		final ArrayList<String> ts = new ArrayList<String>();
-		for(String tag : tags) {
-			ts.add(tag);
-		}
+		final ArrayList<String> ts = new ArrayList<>();
+		Collections.addAll(ts, tags);
 		if(!ts.isEmpty()) {
 			this.tags = ts;
 		} else {
 			this.tags = null;
 		}
 	}
-	
+
 	/**
-	 * @return The unique id of a subaccount for this message 
+	 * @return The unique id of a subaccount for this message
 	 * &ndash; must already exist or will fail with an error.
 	 */
 	public String getSubaccount() {
 		return subaccount;
 	}
-	
+
 	/**
-	 * @param subaccount The unique id of a subaccount for this message 
+	 * @param subaccount The unique id of a subaccount for this message
 	 * &ndash; must already exist or will fail with an error.
 	 */
 	public void setSubaccount(final String subaccount) {
@@ -497,8 +496,8 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return An array of strings indicating which matching URLs will 
-	 * automatically have Google Analytics parameters appended to their 
+	 * @return An array of strings indicating which matching URLs will
+	 * automatically have Google Analytics parameters appended to their
 	 * query string.
 	 */
 	public List<String> getGoogleAnalyticsDomains() {
@@ -506,19 +505,19 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param googleAnalyticsDomains An array of strings indicating which 
-	 * matching URLs will automatically have Google Analytics parameters 
+	 * @param googleAnalyticsDomains An array of strings indicating which
+	 * matching URLs will automatically have Google Analytics parameters
 	 * appended to their query string.
 	 */
 	public void setGoogleAnalyticsDomains(
 			final List<String> googleAnalyticsDomains) {
-		
+
 		this.google_analytics_domains = googleAnalyticsDomains;
 	}
 
 	/**
-	 * @return Optional string indicating the value to set 
-	 * for the utm_campaign tracking parameter. If this isn't 
+	 * @return Optional string indicating the value to set
+	 * for the utm_campaign tracking parameter. If this isn't
 	 * provided the email's from address will be used instead.
 	 */
 	public String getGoogleAnalyticsCampaign() {
@@ -526,20 +525,20 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param googleAnalyticsCampaign Optional string indicating the 
-	 * value to set for the utm_campaign tracking parameter. If this isn't 
+	 * @param googleAnalyticsCampaign Optional string indicating the
+	 * value to set for the utm_campaign tracking parameter. If this isn't
 	 * provided the email's from address will be used instead.
 	 */
 	public void setGoogleAnalyticsCampaign(
 			final String googleAnalyticsCampaign) {
-		
+
 		this.google_analytics_campaign = googleAnalyticsCampaign;
 	}
 
 	/**
-	 * @return A map of user metadata. Mandrill will 
-	 * store this metadata and make it available for retrieval. In 
-	 * addition, you can select up to 10 metadata fields to index and 
+	 * @return A map of user metadata. Mandrill will
+	 * store this metadata and make it available for retrieval. In
+	 * addition, you can select up to 10 metadata fields to index and
 	 * make searchable using the Mandrill search api.
 	 */
 	public Map<String, String> getMetadata() {
@@ -547,9 +546,9 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param metadata A map of user metadata. Mandrill will 
-	 * store this metadata and make it available for retrieval. In 
-	 * addition, you can select up to 10 metadata fields to index and 
+	 * @param metadata A map of user metadata. Mandrill will
+	 * store this metadata and make it available for retrieval. In
+	 * addition, you can select up to 10 metadata fields to index and
 	 * make searchable using the Mandrill search api.
 	 */
 	public void setMetadata(final Map<String, String> metadata) {
@@ -557,7 +556,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @return Per-recipient metadata that will override the 
+	 * @return Per-recipient metadata that will override the
 	 * global values specified in the metadata parameter.
 	 */
 	public List<RecipientMetadata> getRecipientMetadata() {
@@ -565,7 +564,7 @@ public class MandrillMessage {
 	}
 
 	/**
-	 * @param recipientMetadata metadata that will override the 
+	 * @param recipientMetadata metadata that will override the
 	 * global values specified in the metadata parameter.
 	 */
 	public void setRecipientMetadata(
@@ -573,7 +572,7 @@ public class MandrillMessage {
 		this.recipient_metadata = recipientMetadata;
 	}
 
-	
+
 
 	/**
 	 * <p>A single recipient's information.</p>
@@ -633,7 +632,7 @@ public class MandrillMessage {
 
 
 	}
-	
+
 	/**
 	 * <p>A single supported content object for a message. This
 	 * can be a embedded image or an attachment.</p>
@@ -643,7 +642,7 @@ public class MandrillMessage {
 	public static class MessageContent {
 		private String name, type, content;
 		private Boolean binary;
-		
+
 		/**
 		 * @return The file name of the attachment.
 		 */
@@ -696,7 +695,7 @@ public class MandrillMessage {
 			this.binary = binary;
 		}
 	}
-	
+
 	/**
 	 * <p>A per-recipient merge variable.</p>
 	 * @author rschreijer
@@ -706,14 +705,14 @@ public class MandrillMessage {
 		private String rcpt;
 		private MergeVar[] vars;
 		/**
-		 * @return The email address of the recipient that 
+		 * @return The email address of the recipient that
 		 * the merge variables should apply to.
 		 */
 		public String getRcpt() {
 			return rcpt;
 		}
 		/**
-		 * @param rcpt The email address of the recipient that 
+		 * @param rcpt The email address of the recipient that
 		 * the merge variables should apply to.
 		 */
 		public void setRcpt(final String rcpt) {
@@ -732,7 +731,7 @@ public class MandrillMessage {
 			this.vars = vars;
 		}
 	}
-	
+
 	/**
 	 * <p>A single global merge variable.</p>
 	 * @author rschreijer
@@ -759,16 +758,16 @@ public class MandrillMessage {
 		}
 
 		/**
-		 * @return The merge variable's name. 
-		 * Merge variable names are case-insensitive 
+		 * @return The merge variable's name.
+		 * Merge variable names are case-insensitive
 		 * and may not start with _ (underline).
 		 */
 		public String getName() {
 			return name;
 		}
 		/**
-		 * @param name The merge variable's name. 
-		 * Merge variable names are case-insensitive 
+		 * @param name The merge variable's name.
+		 * Merge variable names are case-insensitive
 		 * and may not start with _ (underline).
 		 */
 		public void setName(final String name) {
@@ -787,7 +786,7 @@ public class MandrillMessage {
 			this.content = content;
 		}
 	}
-	
+
 	/**
 	 * <p>Metadata for a single recipient</p>
 	 * @author rschreijer
@@ -797,32 +796,32 @@ public class MandrillMessage {
 		private String rcpt;
 		private Map<String,String> values;
 		/**
-		 * @return The email address of the recipient 
+		 * @return The email address of the recipient
 		 * that the metadata is associated with.
 		 */
 		public String getRcpt() {
 			return rcpt;
 		}
 		/**
-		 * @param rcpt The email address of the recipient 
+		 * @param rcpt The email address of the recipient
 		 * that the metadata is associated with.
 		 */
 		public void setRcpt(final String rcpt) {
 			this.rcpt = rcpt;
 		}
 		/**
-		 * @return A map of user metadata. Mandrill will 
-		 * store this metadata and make it available for retrieval. In 
-		 * addition, you can select up to 10 metadata fields to index and 
+		 * @return A map of user metadata. Mandrill will
+		 * store this metadata and make it available for retrieval. In
+		 * addition, you can select up to 10 metadata fields to index and
 		 * make searchable using the Mandrill search api.
 		 */
 		public Map<String, String> getValues() {
 			return values;
 		}
 		/**
-		 * @param values A map of user metadata. Mandrill will 
-		 * store this metadata and make it available for retrieval. In 
-		 * addition, you can select up to 10 metadata fields to index and 
+		 * @param values A map of user metadata. Mandrill will
+		 * store this metadata and make it available for retrieval. In
+		 * addition, you can select up to 10 metadata fields to index and
 		 * make searchable using the Mandrill search api.
 		 */
 		public void setValues(final Map<String, String> values) {

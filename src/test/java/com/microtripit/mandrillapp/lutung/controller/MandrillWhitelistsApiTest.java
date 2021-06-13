@@ -2,7 +2,7 @@ package com.microtripit.mandrillapp.lutung.controller;
 
 import java.io.IOException;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 

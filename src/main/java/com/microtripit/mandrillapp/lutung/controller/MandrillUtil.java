@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.controller;
 
@@ -21,12 +21,12 @@ final class MandrillUtil {
 	 * @return
 	 */
 	protected static final HashMap<String,Object> paramsWithKey(final String key) {
-		final HashMap<String,Object> params = new HashMap<String,Object>();
+		final HashMap<String,Object> params = new HashMap<>();
 		params.put("key",key);
 		return params;
 
 	}
-	
+
 	/**
 	 * @param url
 	 * @param params
@@ -35,13 +35,13 @@ final class MandrillUtil {
 	 * @throws MandrillApiError Mandrill API Error
 	 * @throws IOException IO Error
 	 */
-	protected static final <OUT> OUT query(final String url, 
-			final Map<String,Object> params, Class<OUT> responseType) 
+	protected static final <OUT> OUT query(final String url,
+			final Map<String,Object> params, Class<OUT> responseType)
 					throws MandrillApiError, IOException {
-		
-		final MandrillRequest<OUT> requestModel = 
-				new MandrillRequest<OUT>(url, params, responseType);
+
+		final MandrillRequest<OUT> requestModel =
+			new MandrillRequest<>(url, params, responseType);
 		return MandrillRequestDispatcher.execute(requestModel);
-		
+
 	}
 }

@@ -27,7 +27,7 @@ public class MandrillTemplatesApi {
 		this.key = key;
 		this.rootUrl = url;
 	}
-	
+
 	public MandrillTemplatesApi(final String key) {
 		this(key, MandrillApi.rootUrl);
 	}
@@ -314,7 +314,7 @@ public class MandrillTemplatesApi {
 		params.put("template_name", name);
 		if(templateContent != null && !templateContent.isEmpty()) {
 			final ArrayList<MandrillContentWrapper> contents =
-					new ArrayList<MandrillContentWrapper>(templateContent.size());
+				new ArrayList<>(templateContent.size());
 			for(String cName : templateContent.keySet()) {
 				contents.add( MandrillContentWrapper.create(
 						cName, templateContent.get(cName)) );
@@ -323,7 +323,7 @@ public class MandrillTemplatesApi {
 		}
 		if(mergeVars != null && !mergeVars.isEmpty()) {
 			final ArrayList<MandrillContentWrapper> vars =
-					new ArrayList<MandrillContentWrapper>(mergeVars.size());
+				new ArrayList<>(mergeVars.size());
 			for(String cName : mergeVars.keySet()) {
 				vars.add( MandrillContentWrapper.create(
 						cName, mergeVars.get(cName)) );

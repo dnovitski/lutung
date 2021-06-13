@@ -6,7 +6,7 @@ package com.microtripit.mandrillapp.lutung.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 
@@ -52,9 +52,9 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 				"<html><body><h1>Hello World!</h1></body></html>", false, labels);
 		Assert.assertNotNull(t);
 		Assert.assertNotNull(t.getName());
-		Assert.assertTrue(t.getLabels().length == 2);
-		Assert.assertTrue(t.getLabels()[0].equals(label1));
-		Assert.assertTrue(t.getLabels()[1].equals(label2));
+		Assert.assertEquals(2, t.getLabels().length);
+		Assert.assertEquals(t.getLabels()[0], label1);
+		Assert.assertEquals(t.getLabels()[1], label2);
 		Assert.assertNotNull( mandrillApi.templates().delete(t.getName()) );
 	}
 
@@ -73,7 +73,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 
 		final MandrillTemplate[] templates = mandrillApi.templates().list();
 		Assert.assertNotNull(templates);
-		Assert.assertTrue(templates.length == (startinTemplates.length + 2));
+		Assert.assertEquals(templates.length, (startinTemplates.length + 2));
 		t1 = mandrillApi.templates().delete(t1.getName());
 		Assert.assertNotNull(t1);
 		t2 = mandrillApi.templates().delete(t2.getName());
@@ -98,11 +98,11 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 
 		final MandrillTemplate[] templatesFound1 = mandrillApi.templates().list(label1);
 		Assert.assertNotNull(templatesFound1);
-		Assert.assertTrue(templatesFound1.length == 1);
+		Assert.assertEquals(1, templatesFound1.length);
 
 		final MandrillTemplate[] templatesFound2 = mandrillApi.templates().list(label2);
 		Assert.assertNotNull(templatesFound2);
-		Assert.assertTrue(templatesFound2.length == 1);
+		Assert.assertEquals(1, templatesFound2.length);
 
 		t1 = mandrillApi.templates().delete(t1.getName());
 		Assert.assertNotNull(t1);
@@ -176,9 +176,9 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 		Assert.assertNotNull(t.getName());
 		Assert.assertEquals(updatedCode, t.getCode());
 		Assert.assertNotNull(t.getCreatedAt());
-		Assert.assertTrue(t.getLabels().length == 2);
-		Assert.assertTrue(t.getLabels()[0].equals(label1));
-		Assert.assertTrue(t.getLabels()[1].equals(label3));
+		Assert.assertEquals(2, t.getLabels().length);
+		Assert.assertEquals(t.getLabels()[0], label1);
+		Assert.assertEquals(t.getLabels()[1], label3);
 		Assert.assertNotNull( mandrillApi.templates().delete(t.getName()) );
 	}
 
@@ -255,7 +255,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 
 		mandrillApi.templates().render(
 				null,
-				new HashMap<String,String>(),
+			new HashMap<>(),
 				null);
 		Assert.fail();
 
@@ -277,9 +277,9 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 		MandrillTemplate t = mandrillApi.templates().add(templateName,
 				code, false);
 		Assert.assertNotNull(t);
-		final HashMap<String, String> content = new HashMap<String,String>();
+		final HashMap<String, String> content = new HashMap<>();
 		content.put("editable", "<div>foo *|MERGE2|*</div>");
-		final HashMap<String, String> mergeVars = new HashMap<String, String>();
+		final HashMap<String, String> mergeVars = new HashMap<>();
 		mergeVars.put("merge1", "Lutung");
 		mergeVars.put("merge2", "bar");
 		final String rendered = mandrillApi.templates().render(

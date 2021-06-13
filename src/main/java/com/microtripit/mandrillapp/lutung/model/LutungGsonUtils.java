@@ -64,7 +64,7 @@ public final class LutungGsonUtils {
 
 			if(!json.isJsonPrimitive()) {
 				throw new JsonParseException(
-						"Unexpected type for date: " +json.toString());
+						"Unexpected type for date: " + json);
 
 			}
 			try {
@@ -118,7 +118,7 @@ public final class LutungGsonUtils {
 
 			if(!json.isJsonPrimitive()) {
 				throw new JsonParseException(
-						"Unexpected type for recipient type: " +json.toString());
+						"Unexpected type for recipient type: " + json);
 			}
 
 			return MandrillMessage.Recipient.Type.valueOf(
