@@ -1,17 +1,14 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.model;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.SocketConfig;
-import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
@@ -21,7 +18,6 @@ import com.microtripit.mandrillapp.lutung.logging.LoggerFactory;
 import com.microtripit.mandrillapp.lutung.model.MandrillApiError.MandrillError;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.ProxySelector;
@@ -62,7 +58,7 @@ public final class MandrillRequestDispatcher {
 
 	private static int getSystemProperty(String name, String defaultValue) {
 		String value = System.getProperty(name, defaultValue);
-		return Integer.valueOf(value);
+		return Integer.parseInt(value);
 	}
 
 	static {
@@ -91,8 +87,8 @@ public final class MandrillRequestDispatcher {
 			final ProxyData proxyData = detectProxyServer(requestModel.getUrl());
 			if (proxyData != null) {
 				if (log.isDebugEnabled()) {
-					log.debug(String.format("Using proxy @" + proxyData.host
-							+ ":" + String.valueOf(proxyData.port)));
+					log.debug("Using proxy @" + proxyData.host
+							+ ":" + proxyData.port);
 				}
 				final HttpHost proxy = new HttpHost(proxyData.host,
 						proxyData.port);
@@ -112,14 +108,14 @@ public final class MandrillRequestDispatcher {
 			if( requestModel.validateResponseStatus(status.getStatusCode()) ) {
 				try {
 					return requestModel.handleResponse( responseString );
-					
+
 				} catch(final HandleResponseException e) {
 					throw new IOException(
-							"Failed to parse response from request '" 
+							"Failed to parse response from request '"
 							+requestModel.getUrl()+ "'", e);
-					
+
 				}
-				
+
 			} else {
 				// ==> compile mandrill error!
 				MandrillError error = null;
@@ -134,12 +130,12 @@ public final class MandrillRequestDispatcher {
 				}
 
 				throw new MandrillApiError(
-						"Unexpected http status in response: " 
-						+status.getStatusCode()+ " (" 
+						"Unexpected http status in response: "
+						+status.getStatusCode()+ " ("
 						+status.getReasonPhrase()+ ")").withError(error);
-				
+
 			}
-				
+
 		} finally {
 			try {
 				if (response != null) {

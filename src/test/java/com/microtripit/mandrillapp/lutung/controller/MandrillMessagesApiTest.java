@@ -3,10 +3,6 @@
  */
 package com.microtripit.mandrillapp.lutung.controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +16,6 @@ import org.junit.Test;
 import com.microtripit.mandrillapp.lutung.MandrillTestCase;
 import com.microtripit.mandrillapp.lutung.model.LutungGsonUtils;
 import com.microtripit.mandrillapp.lutung.model.MandrillApiError;
-import com.microtripit.mandrillapp.lutung.model.MandrillApiError.MandrillError;
 import com.microtripit.mandrillapp.lutung.view.MandrillMessage;
 import com.microtripit.mandrillapp.lutung.view.MandrillMessage.Recipient;
 import com.microtripit.mandrillapp.lutung.view.MandrillMessage.Recipient.Type;
@@ -31,7 +26,7 @@ import com.microtripit.mandrillapp.lutung.view.MandrillMessageStatus;
 import com.microtripit.mandrillapp.lutung.view.MandrillSearchMessageParams;
 import com.microtripit.mandrillapp.lutung.view.MandrillTemplate;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 /**
  * <p>Tests for the messages api implementations.</p>
@@ -51,7 +46,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 	    Recipient to = new Recipient();
 	    to.setEmail(mailToAddress());
 	    to.setType(Type.TO);
-	    List<Recipient> recipients = new ArrayList<MandrillMessage.Recipient>();
+	    List<Recipient> recipients = new ArrayList<>();
 	    recipients.add(to);
 	    MandrillMessage message = new MandrillMessage();
 	    message.setFromEmail("from@test.com");
@@ -64,7 +59,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 	@Test(expected=MandrillApiError.class)
 	public final void testSendTemplate01() throws IOException, MandrillApiError {
 		final HashMap<String,String> templateContent =
-				new HashMap<String,String>();
+			new HashMap<>();
 		templateContent.put("test", "value");
 		final MandrillMessage message = new MandrillMessage();
 		mandrillApi.messages().sendTemplate(null, templateContent, message, null);
@@ -74,7 +69,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 	@Test(expected=MandrillApiError.class)
 	public final void testSendTemplate02() throws IOException, MandrillApiError {
 		final HashMap<String,String> templateContent =
-				new HashMap<String,String>();
+			new HashMap<>();
 		templateContent.put("test", "value");
 		mandrillApi.messages().sendTemplate("bvy38q34v93vzn39u4bvu9ewvbi349",
 				templateContent, null, null);
@@ -101,7 +96,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
         Recipient to = new Recipient();
         to.setEmail(mailToAddress());
         to.setType(Type.TO);
-        List<Recipient> recipients = new ArrayList<MandrillMessage.Recipient>();
+        List<Recipient> recipients = new ArrayList<>();
         recipients.add(to);
         MandrillMessage message = new MandrillMessage();
         message.setFromEmail("from@test.com");
@@ -173,10 +168,10 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 		MandrillMessage parsedMessage = mandrillApi.messages().parse(null);
 		Assert.fail();
 	}
-	
+
 	@Test
 	public void testSmtpInfoResponse() {
-		String responseString = "{\"ts\":1234567890," 
+		String responseString = "{\"ts\":1234567890,"
 						+ "\"_id\":\"12345678901234567890123456789012\","
 						+ "\"state\":\"sent\","
 						+ "\"subject\":\"Subject\","
@@ -195,7 +190,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 						+ "\"metadata\":{},"
 						+ "\"opens_detail\":[],"
 						+ "\"clicks_detail\":[]}";
-		
+
 		MandrillMessageInfo m = LutungGsonUtils.getGson().fromJson(responseString, MandrillMessageInfo.class);
         Assert.assertEquals(2, m.getSmtpEvents().size());
         SMTPEvent event = m.getSmtpEvents().get(1);
@@ -205,6 +200,6 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
         Assert.assertEquals("127.0.0.1", event.getSourceIp());
         Assert.assertEquals("127.0.0.2", event.getDestinationIp());
         Assert.assertEquals(12345, event.getSize());
-		
+
 	}
 }
