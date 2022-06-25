@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.controller;
 
@@ -20,9 +20,9 @@ import com.microtripit.mandrillapp.lutung.view.MandrillTimeSeries;
  * @since Mar 21, 2013
  */
 public final class MandrillTagsApiTest extends MandrillTestCase {
-	
+
 	@Test
-	public final void testList() throws IOException, MandrillApiError {
+	public void testList() throws IOException, MandrillApiError {
 		final MandrillTag[] tags = mandrillApi.tags().list();
 		Assert.assertNotNull(tags);
 		for(MandrillTag tag : tags) {
@@ -30,21 +30,21 @@ public final class MandrillTagsApiTest extends MandrillTestCase {
 			Assert.assertNull(tag.getStats());
 		}
 	}
-	
+
 	@Test(expected=MandrillApiError.class)
-	public final void testDelete() throws IOException, MandrillApiError {
+	public void testDelete() throws IOException, MandrillApiError {
 		mandrillApi.tags().delete(null);
 		Assert.fail();
 	}
-	
+
 	@Test(expected=MandrillApiError.class)
-	public final void testInfo01() throws IOException, MandrillApiError {
+	public void testInfo01() throws IOException, MandrillApiError {
 		mandrillApi.tags().info(null);
 		Assert.fail();
 	}
-	
+
 	@Test
-	public final void testInfo02() throws IOException, MandrillApiError {
+	public void testInfo02() throws IOException, MandrillApiError {
 		final MandrillTag[] tags = mandrillApi.tags().list();
 		Assert.assertNotNull(tags);
 		if(tags.length > 0) {
@@ -53,15 +53,15 @@ public final class MandrillTagsApiTest extends MandrillTestCase {
 			Assert.assertNotNull(tag.getStats());
 		}
 	}
-	
+
 	@Test(expected=MandrillApiError.class)
-	public final void testTimeSeries01() throws IOException, MandrillApiError {
+	public void testTimeSeries01() throws IOException, MandrillApiError {
 		mandrillApi.tags().timeSeries(null);
 		Assert.fail();
 	}
-	
+
 	@Test
-	public final void testTimeSeries02() throws IOException, MandrillApiError {
+	public void testTimeSeries02() throws IOException, MandrillApiError {
 		final MandrillTag[] tags = mandrillApi.tags().list();
 		Assert.assertNotNull(tags);
 		if(tags.length > 0) {
@@ -73,9 +73,9 @@ public final class MandrillTagsApiTest extends MandrillTestCase {
 			}
 		}
 	}
-	
+
 	@Test
-	public final void testAllTimeSeries() throws IOException, MandrillApiError {
+	public void testAllTimeSeries() throws IOException, MandrillApiError {
 		final MandrillTimeSeries[] series = mandrillApi.tags().allTimeSeries();
 		Assert.assertNotNull(series);
 		for(MandrillTimeSeries s : series) {

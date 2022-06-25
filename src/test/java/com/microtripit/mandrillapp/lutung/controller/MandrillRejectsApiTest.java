@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.controller;
 
@@ -17,21 +17,21 @@ import com.microtripit.mandrillapp.lutung.model.MandrillApiError;
  * @since Mar 21, 2013
  */
 public final class MandrillRejectsApiTest extends MandrillTestCase {
-	
+
 	@Test(expected=MandrillApiError.class)
-	public final void testAdd() throws IOException, MandrillApiError {
+	public void testAdd() throws IOException, MandrillApiError {
 		mandrillApi.rejects().add(null, null, null);
 		Assert.fail();
 	}
-	
+
 	@Test
-	public final void testList() throws IOException, MandrillApiError {
+	public void testList() throws IOException, MandrillApiError {
 		Assert.assertNotNull( mandrillApi.rejects().list(null, null) );
-		
+
 	}
-	
+
 	@Test(expected=MandrillApiError.class)
-	public final void testDelete() throws IOException, MandrillApiError {
+	public void testDelete() throws IOException, MandrillApiError {
 		mandrillApi.rejects().delete(null);
 		Assert.fail();
 	}

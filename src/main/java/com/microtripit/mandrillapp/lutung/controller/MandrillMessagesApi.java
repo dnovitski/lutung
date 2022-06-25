@@ -437,17 +437,17 @@ public class MandrillMessagesApi {
 		/**
 		 * @return The name of the content.
 		 */
-		public final String getName() {
+		public String getName() {
 			return name;
 		}
 		/**
 		 * @return The actual content.
 		 */
-		public final String getContent() {
+		public String getContent() {
 			return content;
 		}
 
-		protected static final TemplateContent create(
+		protected static TemplateContent create(
 				final String name, final String content) {
 
 			final TemplateContent c = new TemplateContent();

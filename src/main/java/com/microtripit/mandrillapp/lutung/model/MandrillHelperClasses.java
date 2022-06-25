@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.model;
 
@@ -8,8 +8,8 @@ package com.microtripit.mandrillapp.lutung.model;
  * @since Mar 18, 2013
  */
 public final class MandrillHelperClasses {
-	
-	
+
+
 	public static class EmailClass {
 		private String email;
 		public final String getEmail() {
@@ -29,7 +29,7 @@ public final class MandrillHelperClasses {
 			return added;
 		}
 	}
-	
+
 	/**
 	 * @author rschreijer
 	 * @since Mar 18, 2013
@@ -43,9 +43,9 @@ public final class MandrillHelperClasses {
 			return deleted;
 		}
 	}
-	
+
 	/**
-	 * <p>Simple Wrapper class that is a container for a 
+	 * <p>Simple Wrapper class that is a container for a
 	 * <code>name,content</code> pair, as String objects.</p>
 	 * @author rschreijer
 	 * @since Mar 18, 2013
@@ -56,58 +56,58 @@ public final class MandrillHelperClasses {
 		/**
 		 * @return the name
 		 */
-		public final String getName() {
+		public String getName() {
 			return name;
 		}
 
 		/**
 		 * @param name the name to set
 		 */
-		public final void setName(final String name) {
+		public void setName(final String name) {
 			this.name = name;
 		}
 
 		/**
 		 * @return the content
 		 */
-		public final String getContent() {
+		public String getContent() {
 			return content;
 		}
 
 		/**
 		 * @param content the content to set
 		 */
-		public final void setContent(final String content) {
+		public void setContent(final String content) {
 			this.content = content;
 		}
-		
-		public static final MandrillContentWrapper create(
+
+		public static MandrillContentWrapper create(
 				final String name, final String content) {
-			
+
 			final MandrillContentWrapper w = new MandrillContentWrapper();
 			w.setName(name);
 			w.setContent(content);
 			return w;
-			
+
 		}
 
 	}
-	
+
 	/**
-	 * <p>The result of rendering the given template with the 
+	 * <p>The result of rendering the given template with the
 	 * content and merge field values injected.</p>
 	 * @author rschreijer
 	 * @since Mar 18, 2013
 	 */
 	public static final class MandrillRenderTemplateResponse {
 		private String html;
-		
+
 		/**
 		 * @return The rendered HTML as a string.
 		 */
-		public final String getHtml() {
+		public String getHtml() {
 			return html;
 		}
 	}
-	
+
 }

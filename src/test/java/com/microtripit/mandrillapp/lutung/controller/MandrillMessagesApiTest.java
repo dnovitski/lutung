@@ -36,13 +36,13 @@ import org.junit.Assert;
 public final class MandrillMessagesApiTest extends MandrillTestCase {
 
 	@Test(expected=MandrillApiError.class)
-	public final void testSend01() throws IOException, MandrillApiError {
+	public void testSend01() throws IOException, MandrillApiError {
 		mandrillApi.messages().send(null, null);
 		Assert.fail();
 	}
 
 	@Test
-	public final void testSend02() throws IOException, MandrillApiError {
+	public void testSend02() throws IOException, MandrillApiError {
 	    Recipient to = new Recipient();
 	    to.setEmail(mailToAddress());
 	    to.setType(Type.TO);
@@ -57,7 +57,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
     }
 
 	@Test(expected=MandrillApiError.class)
-	public final void testSendTemplate01() throws IOException, MandrillApiError {
+	public void testSendTemplate01() throws IOException, MandrillApiError {
 		final HashMap<String,String> templateContent =
 			new HashMap<>();
 		templateContent.put("test", "value");
@@ -67,7 +67,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testSendTemplate02() throws IOException, MandrillApiError {
+	public void testSendTemplate02() throws IOException, MandrillApiError {
 		final HashMap<String,String> templateContent =
 			new HashMap<>();
 		templateContent.put("test", "value");
@@ -77,7 +77,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testSendTemplate03() throws IOException, MandrillApiError {
+	public void testSendTemplate03() throws IOException, MandrillApiError {
 		final MandrillMessage message = new MandrillMessage();
 		mandrillApi.messages().sendTemplate("bvy38q34v93vzn39u4bvu9ewvbi349",
 				null, message, null);
@@ -85,7 +85,7 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-    public final void testSendTemplate04() throws IOException, MandrillApiError {
+    public void testSendTemplate04() throws IOException, MandrillApiError {
         String templateName = "lutung_templatename_unit_test_sendTemplate04_" + System.currentTimeMillis();
 
         final MandrillTemplate t = mandrillApi.templates().add(templateName,
@@ -113,12 +113,12 @@ public final class MandrillMessagesApiTest extends MandrillTestCase {
     }
 
 	@Test
-	public final void testSearch01() throws IOException, MandrillApiError {
+	public void testSearch01() throws IOException, MandrillApiError {
 		Assert.assertNotNull(mandrillApi.messages().search(null));
 	}
 
 	@Test
-	public final void testSearch02() throws IOException, MandrillApiError {
+	public void testSearch02() throws IOException, MandrillApiError {
 		final MandrillSearchMessageParams params =
 				new MandrillSearchMessageParams();
 		params.setQuery("email:test.com");

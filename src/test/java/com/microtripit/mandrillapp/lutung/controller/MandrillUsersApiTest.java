@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.controller;
 
@@ -20,9 +20,9 @@ import com.microtripit.mandrillapp.lutung.view.MandrillUserInfo;
  * @since Mar 21, 2013
  */
 public final class MandrillUsersApiTest extends MandrillTestCase {
-	
+
 	@Test
-	public final void testInfo() throws IOException, MandrillApiError {
+	public void testInfo() throws IOException, MandrillApiError {
 		final MandrillUserInfo userInfo = mandrillApi.users().info();
 		Assert.assertNotNull(userInfo);
 		Assert.assertNotNull(userInfo.getPublicId());
@@ -33,15 +33,15 @@ public final class MandrillUsersApiTest extends MandrillTestCase {
 		Assert.assertTrue(userInfo.getHourlyQuota() >= 0);
 		Assert.assertNotNull(userInfo.getStats());
 	}
-	
+
 	@Test
-	public final void testPing() throws IOException, MandrillApiError {
+	public void testPing() throws IOException, MandrillApiError {
 		final String pong = mandrillApi.users().ping();
 		Assert.assertEquals("PONG!", pong);
 	}
-	
+
 	@Test
-	public final void testSenders() throws IOException, MandrillApiError {
+	public void testSenders() throws IOException, MandrillApiError {
 		final MandrillSender[] senders = mandrillApi.users().senders();
 		Assert.assertNotNull(senders);
 		if(senders.length > 0) {
