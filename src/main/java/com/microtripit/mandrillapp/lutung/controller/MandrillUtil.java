@@ -20,7 +20,7 @@ final class MandrillUtil {
 	 * @param key
 	 * @return
 	 */
-	protected static final HashMap<String,Object> paramsWithKey(final String key) {
+	protected static HashMap<String,Object> paramsWithKey(final String key) {
 		final HashMap<String,Object> params = new HashMap<>();
 		params.put("key",key);
 		return params;
@@ -35,8 +35,8 @@ final class MandrillUtil {
 	 * @throws MandrillApiError Mandrill API Error
 	 * @throws IOException IO Error
 	 */
-	protected static final <OUT> OUT query(final String url,
-			final Map<String,Object> params, Class<OUT> responseType)
+	protected static <OUT> OUT query(final String url,
+									 final Map<String,Object> params, Class<OUT> responseType)
 					throws MandrillApiError, IOException {
 
 		final MandrillRequest<OUT> requestModel =

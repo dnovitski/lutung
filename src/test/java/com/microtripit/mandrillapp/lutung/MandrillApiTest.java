@@ -13,7 +13,7 @@ import org.junit.Test;
 public final class MandrillApiTest extends MandrillTestCase {
 
 	@Test
-	public final void testApiKey() {
+	public void testApiKey() {
 		final String key = mandrillApi.getKey();
 		Assert.assertNotNull(key);
 		Assert.assertFalse( key.isEmpty() );
@@ -21,67 +21,67 @@ public final class MandrillApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testUsers() {
+	public void testUsers() {
 		Assert.assertNotNull(mandrillApi.users());
 	}
 
 	@Test
-	public final void testMessages() {
+	public void testMessages() {
 		Assert.assertNotNull(mandrillApi.messages());
 	}
 
 	@Test
-	public final void testTags() {
+	public void testTags() {
 		Assert.assertNotNull(mandrillApi.tags());
 	}
 
 	@Test
-	public final void testRejects() {
+	public void testRejects() {
 		Assert.assertNotNull(mandrillApi.rejects());
 	}
 
 	@Test
-	public final void testWhitelists() {
+	public void testWhitelists() {
 		Assert.assertNotNull(mandrillApi.whitelists());
 	}
 
 	@Test
-	public final void testSenders() {
+	public void testSenders() {
 		Assert.assertNotNull(mandrillApi.senders());
 	}
 
 	@Test
-	public final void testUrls() {
+	public void testUrls() {
 		Assert.assertNotNull(mandrillApi.urls());
 	}
 
 	@Test
-	public final void testTemplates() {
+	public void testTemplates() {
 		Assert.assertNotNull(mandrillApi.templates());
 	}
 
 	@Test
-	public final void testWebhooks() {
+	public void testWebhooks() {
 		Assert.assertNotNull(mandrillApi.webhooks());
 	}
 
 	@Test
-	public final void testSubaccounts() {
+	public void testSubaccounts() {
 		Assert.assertNotNull(mandrillApi.subaccounts());
 	}
 
 	@Test
-	public final void testInbound() {
+	public void testInbound() {
 		Assert.assertNotNull(mandrillApi.inbound());
 	}
 
 	@Test
-	public final void testExports() {
+	public void testExports() {
 		Assert.assertNotNull(mandrillApi.exports());
 	}
 
 	@Test
-	public final void testIps() {
+	public void testIps() {
 		Assert.assertNotNull(mandrillApi.ips());
 	}
 }

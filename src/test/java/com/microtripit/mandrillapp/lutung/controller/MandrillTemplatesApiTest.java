@@ -22,14 +22,14 @@ import com.microtripit.mandrillapp.lutung.view.MandrillTimeSeries;
 public final class MandrillTemplatesApiTest extends MandrillTestCase {
 
 	@Test(expected=MandrillApiError.class)
-	public final void testAddWithoutName() throws IOException, MandrillApiError {
+	public void testAddWithoutName() throws IOException, MandrillApiError {
 		mandrillApi.templates().add(null,
 				"<html><body><h1>Hello World!</h1></body></html>", null);
 		Assert.fail();
 	}
 
 	@Test
-	public final void testAdd() throws IOException, MandrillApiError {
+	public void testAdd() throws IOException, MandrillApiError {
 
 		String templateName = "lutung_templatename_unit_test_add1_" + System.currentTimeMillis();
 
@@ -41,7 +41,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testAddWithLabels() throws IOException, MandrillApiError {
+	public void testAddWithLabels() throws IOException, MandrillApiError {
 
 		String templateName = "lutung_templatename_unit_test_add2_" + System.currentTimeMillis();
 		String label1 = "1" + System.currentTimeMillis();
@@ -59,7 +59,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testList() throws IOException, MandrillApiError {
+	public void testList() throws IOException, MandrillApiError {
 
 		final MandrillTemplate[] startinTemplates = mandrillApi.templates().list();
 
@@ -81,7 +81,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testListFilterByLabel() throws IOException, MandrillApiError {
+	public void testListFilterByLabel() throws IOException, MandrillApiError {
 
 		String label1 = "1" + System.currentTimeMillis();
 		String label2 = "2" + System.currentTimeMillis();
@@ -111,13 +111,13 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testInfoWithoutName() throws IOException, MandrillApiError {
+	public void testInfoWithoutName() throws IOException, MandrillApiError {
 		mandrillApi.templates().info(null);
 		Assert.fail();
 	}
 
 	@Test
-	public final void testInfo() throws IOException, MandrillApiError {
+	public void testInfo() throws IOException, MandrillApiError {
 		final MandrillTemplate[] templates = mandrillApi.templates().list();
 		Assert.assertNotNull(templates);
 		if(templates.length > 0) {
@@ -131,21 +131,21 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testUpdateWithoutName() throws IOException, MandrillApiError {
+	public void testUpdateWithoutName() throws IOException, MandrillApiError {
 		mandrillApi.templates().update(null,
 				"<html><body><h1>Hello World!</h1></body></html>", false);
 		Assert.fail();
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testUpdateWithoutCode() throws IOException, MandrillApiError {
+	public void testUpdateWithoutCode() throws IOException, MandrillApiError {
 		String templateName = "lutung_templatename_unit_test_update1_" + System.currentTimeMillis();
 		mandrillApi.templates().update(templateName, null, false);
 		Assert.fail();
 	}
 
 	@Test
-	public final void testUpdate() throws IOException, MandrillApiError {
+	public void testUpdate() throws IOException, MandrillApiError {
 		String templateName = "lutung_templatename_unit_test_update2_" + System.currentTimeMillis();
 		MandrillTemplate t = mandrillApi.templates().add(templateName,
 				"<html><body><h1>Hello World!</h1></body></html>", false);
@@ -160,7 +160,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testUpdateIncludingLabels() throws IOException, MandrillApiError {
+	public void testUpdateIncludingLabels() throws IOException, MandrillApiError {
 		String templateName = "lutung_templatename_unit_test_update3_" + System.currentTimeMillis();
 		String label1 = "1" + System.currentTimeMillis();
 		String label2 = "2" + System.currentTimeMillis();
@@ -183,7 +183,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testPublishWithoutName()
+	public void testPublishWithoutName()
 			throws IOException, MandrillApiError {
 
 		mandrillApi.templates().publish(null);
@@ -191,7 +191,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testPublish() throws IOException, MandrillApiError {
+	public void testPublish() throws IOException, MandrillApiError {
 		String templateName = "lutung_templatename_unit_test_publish_" + System.currentTimeMillis();
 		MandrillTemplate t = mandrillApi.templates().add(
 				templateName,
@@ -206,7 +206,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testDeleteWithoutName()
+	public void testDeleteWithoutName()
 			throws IOException, MandrillApiError {
 
 		mandrillApi.templates().delete(null);
@@ -214,7 +214,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testDelete() throws IOException, MandrillApiError {
+	public void testDelete() throws IOException, MandrillApiError {
 		String templateName = "lutung_templatename_unit_test_delete_" + System.currentTimeMillis();
 		MandrillTemplate t = mandrillApi.templates().add(
 				templateName,
@@ -226,7 +226,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testTimeSeriesWithoutName()
+	public void testTimeSeriesWithoutName()
 			throws IOException, MandrillApiError {
 
 		mandrillApi.templates().timeSeries(null);
@@ -234,7 +234,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testTimeSeries()
+	public void testTimeSeries()
 			throws IOException, MandrillApiError {
 
 		final MandrillTemplate[] templates = mandrillApi.templates().list();
@@ -250,7 +250,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testRenderWithoutName()
+	public void testRenderWithoutName()
 			throws IOException, MandrillApiError {
 
 		mandrillApi.templates().render(
@@ -262,7 +262,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test(expected=MandrillApiError.class)
-	public final void testRenderWithoutContent()
+	public void testRenderWithoutContent()
 			throws IOException, MandrillApiError {
 		String templateName = "lutung_templatename_unit_test_render1_" + System.currentTimeMillis();
 		mandrillApi.templates().render(templateName, null, null);
@@ -271,7 +271,7 @@ public final class MandrillTemplatesApiTest extends MandrillTestCase {
 	}
 
 	@Test
-	public final void testRender() throws IOException, MandrillApiError {
+	public void testRender() throws IOException, MandrillApiError {
 		final String code = "<html><body><h1>Hello *|MERGE1|*!</h1></body></html>";
 		String templateName = "lutung_templatename_unit_test_render2_" + System.currentTimeMillis();
 		MandrillTemplate t = mandrillApi.templates().add(templateName,

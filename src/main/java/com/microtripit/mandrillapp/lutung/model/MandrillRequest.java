@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.model;
 
@@ -22,25 +22,25 @@ public final class MandrillRequest<OUT> implements RequestModel<OUT> {
 	private final String url;
 	private final Class<OUT> responseContentType;
 	private final Map<String,? extends Object> requestParams;
-	
-	public MandrillRequest( final String url, 
-			final Map<String,? extends Object> params, 
+
+	public MandrillRequest( final String url,
+			final Map<String,? extends Object> params,
 			final Class<OUT> responseType ) {
-		
+
 		if(responseType == null) {
 			throw new NullPointerException();
-			
+
 		}
 		this.url = url;
 		this.requestParams = params;
 		this.responseContentType = responseType;
 	}
 
-	public final String getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public final HttpRequestBase getRequest() throws IOException {
+	public HttpRequestBase getRequest() throws IOException {
 		final String paramsStr = LutungGsonUtils.getGson().toJson(
 				requestParams, requestParams.getClass());
         log.debug("raw content for request:\n" +paramsStr);
@@ -49,26 +49,26 @@ public final class MandrillRequest<OUT> implements RequestModel<OUT> {
 		final HttpPost request = new HttpPost(url);
 		request.setEntity(entity);
 		return request;
-		
+
 	}
 
-	public final boolean validateResponseStatus(final int httpResponseStatus) {
+	public boolean validateResponseStatus(final int httpResponseStatus) {
 		return (httpResponseStatus == 200);
 	}
 
-	public final OUT handleResponse(final String responseString) 
+	public OUT handleResponse(final String responseString)
 			throws HandleResponseException {
-		
+
 		try {
             log.debug("raw content from response:\n" +responseString);
 			return LutungGsonUtils.getGson().fromJson(
 					responseString, responseContentType);
-			
+
 		} catch(final Throwable t) {
 			String msg = "Error handling Mandrill response " +
 					((responseString != null)?": '"+responseString+"'" : "");
 			throw new HandleResponseException(msg, t);
-			
+
 		}
 	}
 

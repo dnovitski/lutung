@@ -31,15 +31,15 @@ public final class LutungGsonUtils {
 
 	private static Gson gson = createGson();
 
-	public static final Gson getGson() {
+	public static Gson getGson() {
 		return gson;
 	}
 
-	public static final Gson createGson() {
+	public static Gson createGson() {
 		return createGsonBuilder().create();
 	}
 
-	public static final GsonBuilder createGsonBuilder() {
+	public static GsonBuilder createGsonBuilder() {
 		return new GsonBuilder()
 				.setDateFormat(dateFormatStr)
 				.registerTypeAdapter(Date.class, new DateDeserializer())
@@ -57,9 +57,9 @@ public final class LutungGsonUtils {
 			return formatter;
 		}
 
-		public final Date deserialize(final JsonElement json,
-				final Type typeOfT,
-				final JsonDeserializationContext context)
+		public Date deserialize(final JsonElement json,
+								final Type typeOfT,
+								final JsonDeserializationContext context)
 						throws JsonParseException {
 
 			if(!json.isJsonPrimitive()) {
@@ -110,7 +110,7 @@ public final class LutungGsonUtils {
 			implements JsonDeserializer<MandrillMessage.Recipient.Type>,
 				JsonSerializer<MandrillMessage.Recipient.Type> {
 
-		public final MandrillMessage.Recipient.Type deserialize(
+		public MandrillMessage.Recipient.Type deserialize(
 				final JsonElement json,
 				final Type typeOfT,
 				final JsonDeserializationContext context)

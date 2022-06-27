@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.controller;
 
@@ -18,24 +18,24 @@ import com.microtripit.mandrillapp.lutung.view.MandrillWebhook;
  * @since Mar 22, 2013
  */
 public final class MandrillWebhooksApiTest extends MandrillTestCase {
-	
+
 	@Test
-	public final void testList() throws IOException, MandrillApiError {
+	public void testList() throws IOException, MandrillApiError {
 		final MandrillWebhook[] webhooks = mandrillApi.webhooks().list();
 		Assert.assertNotNull(webhooks);
 		for(MandrillWebhook w : webhooks) {
 			Assert.assertNotNull(w.getId());
 		}
 	}
-	
+
 	@Test(expected=MandrillApiError.class)
-	public final void testInfoWithoutId() throws IOException, MandrillApiError {
+	public void testInfoWithoutId() throws IOException, MandrillApiError {
 		mandrillApi.webhooks().info(null);
 		Assert.fail();
 	}
-	
+
 	@Test
-	public final void testInfo() throws IOException, MandrillApiError {
+	public void testInfo() throws IOException, MandrillApiError {
 		final MandrillWebhook[] webhooks = mandrillApi.webhooks().list();
 		Assert.assertNotNull(webhooks);
 		if(webhooks.length > 0) {

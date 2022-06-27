@@ -78,7 +78,7 @@ public final class MandrillRequestDispatcher {
 				.build();
 	}
 
-	public static final <T> T execute(final RequestModel<T> requestModel) throws MandrillApiError, IOException {
+	public static <T> T execute(final RequestModel<T> requestModel) throws MandrillApiError, IOException {
 
 		HttpResponse response = null;
 		String responseString = null;
@@ -148,7 +148,7 @@ public final class MandrillRequestDispatcher {
 		}
 	}
 
-    private static final ProxyData detectProxyServer(final String url) {
+    private static ProxyData detectProxyServer(final String url) {
         try {
             final List<Proxy> proxies = ProxySelector.getDefault().select(new URI(url));
             if(proxies != null) {
