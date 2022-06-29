@@ -37,6 +37,7 @@ If you're not using Maven, see [Dependencies](#dependencies) below.
 Examples
 --------
 **The 'whoami' of Mandrill:**
+
 ```java
 MandrillApi mandrillApi = new MandrillApi("<put ur Mandrill API key here>");
 
@@ -44,7 +45,7 @@ MandrillUserInfo user = mandrillApi.users().info();
 
 // pretty-print w/ gson
 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-System.out.println( gson.toJson(user) );
+System.out.println(gson.toJson(user));
 ```
 
 
@@ -59,21 +60,27 @@ message.setHtml("<h1>Hi pal!</h1><br />Really, I'm just saying hi!");
 message.setAutoText(true);
 message.setFromEmail("kitty@yourdomain.com");
 message.setFromName("Kitty Katz");
+
 // add recipients
-ArrayList<Recipient> recipients = new ArrayList<Recipient>();
+List<Recipient> recipients = new ArrayList<>();
+
 Recipient recipient = new Recipient();
 recipient.setEmail("claireannette@someotherdomain.com");
 recipient.setName("Claire Annette");
 recipients.add(recipient);
-recipient = new Recipient();
-recipient.setEmail("terrybull@yetanotherdomain.com");
-recipients.add(recipient);
+
+Recipient recipient2 = new Recipient();
+recipient2.setEmail("terrybull@yetanotherdomain.com");
+recipients.add(recipient2);
+
 message.setTo(recipients);
 message.setPreserveRecipients(true);
-ArrayList<String> tags = new ArrayList<String>();
+
+List<String> tags = new ArrayList<>();
 tags.add("test");
 tags.add("helloworld");
 message.setTags(tags);
+
 // ... add more message details if you want to!
 // then ... send
 MandrillMessageStatus[] messageStatusReports = mandrillApi
@@ -87,7 +94,7 @@ MandrillApi mandrillApi = new MandrillApi("<put ur Mandrill API key here>");
 
 try {
 	MandrillUserInfo user = mandrillApi.users().info();
-} catch(final MandrillApiError e) {
+} catch(MandrillApiError e) {
 	log.error(e.getMandrillErrorAsJson(), e);
 }
 ```
