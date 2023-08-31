@@ -24,7 +24,6 @@ final class MandrillUtil {
 		final HashMap<String,Object> params = new HashMap<>();
 		params.put("key",key);
 		return params;
-
 	}
 
 	/**

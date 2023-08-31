@@ -63,17 +63,13 @@ public final class LutungGsonUtils {
 						throws JsonParseException {
 
 			if(!json.isJsonPrimitive()) {
-				throw new JsonParseException(
-						"Unexpected type for date: " + json);
-
+				throw new JsonParseException("Unexpected type for date: " + json);
 			}
 			try {
 				return getNewDefaultDateTimeFormat().parse(json.getAsString());
 
 			} catch(final ParseException e) {
-				throw new JsonParseException("Failed to parse date '"
-						+json.getAsString()+ "'", e);
-
+				throw new JsonParseException("Failed to parse date '" + json.getAsString() + "'", e);
 			}
 		}
 

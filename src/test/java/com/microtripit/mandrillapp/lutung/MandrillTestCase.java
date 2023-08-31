@@ -3,9 +3,8 @@
  */
 package com.microtripit.mandrillapp.lutung;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,10 +18,26 @@ import java.nio.charset.StandardCharsets;
  * @author rschreijer
  *
  */
+@Slf4j
 public abstract class MandrillTestCase {
-	private static final Log log = LogFactory.getLog(MandrillApiTest.class);
 
 	protected static MandrillApi mandrillApi;
+
+	@BeforeClass
+	public static void runBeforeClass() {
+		final String key = getMandrillApiKey();
+		if(key != null) {
+			mandrillApi = new MandrillApi(key);
+		} else {
+			mandrillApi = null;
+		}
+	}
+
+	@Before
+	public final void runBefore() {
+		Assume.assumeNotNull(mandrillApi);
+	}
+
 
 	/**
 	 * <p>If you want to run your own tests, either provide a file
@@ -34,13 +49,13 @@ public abstract class MandrillTestCase {
 	 * is mentioned in .gitignore and will not be pushed to git!</p>
 	 * @return Your Mandrill API key.
 	 */
-	protected static final String getMandrillApiKey() {
+	protected static String getMandrillApiKey() {
 		try {
 			final InputStream is = MandrillTestCase.class.getClassLoader()
 					.getResourceAsStream("myapikey.txt");
 			if(is == null) {
 				throw new FileNotFoundException(
-						"Please change " +MandrillTestCase.class.getCanonicalName()
+					"Please change " + MandrillTestCase.class.getCanonicalName()
 						+ ".getMandrillApiKey() to just return your Mandrill " +
 						"api key. The file being loaded in that method is just " +
 						"a security measure ... I didn't want my own api key in " +
@@ -55,30 +70,14 @@ public abstract class MandrillTestCase {
 			return apikey;
 
 		} catch(final IOException e) {
-			log.error("No Mandrill API key defined - " +
-					"please provide your Mandrill API key!", e);
+			log.error("No Mandrill API key defined - please provide your Mandrill API key!", e);
 			return null;
-
 		}
 	}
 
-	@BeforeClass
-	public static final void runBeforeClass() {
-		final String key = getMandrillApiKey();
-		if(key != null) {
-			mandrillApi = new MandrillApi(key);
-		} else {
-			mandrillApi = null;
-		}
-	}
 
-	protected static final String mailToAddress() {
+	protected static String mailToAddress() {
 		return "lutung.mandrill@gmail.com";
-	}
-
-	@Before
-	public final void runBefore() {
-		Assume.assumeNotNull(mandrillApi);
 	}
 
 }

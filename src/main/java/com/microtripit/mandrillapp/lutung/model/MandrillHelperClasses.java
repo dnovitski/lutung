@@ -9,7 +9,6 @@ package com.microtripit.mandrillapp.lutung.model;
  */
 public final class MandrillHelperClasses {
 
-
 	public static class EmailClass {
 		private String email;
 		public final String getEmail() {
