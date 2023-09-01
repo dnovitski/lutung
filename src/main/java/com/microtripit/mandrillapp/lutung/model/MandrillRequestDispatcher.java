@@ -3,6 +3,8 @@
  */
 package com.microtripit.mandrillapp.lutung.model;
 
+import com.microtripit.mandrillapp.lutung.model.MandrillApiError.MandrillError;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -12,10 +14,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
-
-import com.microtripit.mandrillapp.lutung.logging.Logger;
-import com.microtripit.mandrillapp.lutung.logging.LoggerFactory;
-import com.microtripit.mandrillapp.lutung.model.MandrillApiError.MandrillError;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -28,8 +26,8 @@ import java.util.List;
  * @author rschreijer
  * @since Feb 21, 2013
  */
+@Slf4j
 public final class MandrillRequestDispatcher {
-    private static final Logger log = LoggerFactory.getLogger(MandrillRequestDispatcher.class);
 
 	/**
 	 * See https://hc.apache.org/httpcomponents-core-4.3.x/httpcore/apidocs/org/apache/http/params/HttpConnectionParams.html#setSoTimeout(org.apache.http.params.HttpParams, int)
@@ -86,12 +84,8 @@ public final class MandrillRequestDispatcher {
 			// use proxy?
 			final ProxyData proxyData = detectProxyServer(requestModel.getUrl());
 			if (proxyData != null) {
-				if (log.isDebugEnabled()) {
-					log.debug("Using proxy @" + proxyData.host
-							+ ":" + proxyData.port);
-				}
-				final HttpHost proxy = new HttpHost(proxyData.host,
-						proxyData.port);
+				log.debug("Using proxy @{}:{}", proxyData.host, proxyData.port);
+				final HttpHost proxy = new HttpHost(proxyData.host, proxyData.port);
 
 				RequestConfig requestConfig = RequestConfig.custom()
 						.setProxy(proxy).build();
@@ -101,7 +95,7 @@ public final class MandrillRequestDispatcher {
 						.setConnectionManager(connexionManager).useSystemProperties()
 						.build();
 			}
-            log.debug("starting request '" +requestModel.getUrl()+ "'");
+            log.debug("starting request '{}'", requestModel.getUrl());
 			response = httpClient.execute( requestModel.getRequest() );
 			final StatusLine status = response.getStatusLine();
 			responseString = EntityUtils.toString(response.getEntity());

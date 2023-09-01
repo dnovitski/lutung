@@ -3,21 +3,19 @@
  */
 package com.microtripit.mandrillapp.lutung.model;
 
-import com.microtripit.mandrillapp.lutung.logging.Logger;
-import com.microtripit.mandrillapp.lutung.logging.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**
  * @author rschreijer
  * @since Mar 16, 2013
  */
+@Slf4j
 public final class MandrillRequest<OUT> implements RequestModel<OUT> {
-    private static final Logger log = LoggerFactory.getLogger(MandrillRequest.class);
 
 	private final String url;
 	private final Class<OUT> responseContentType;
@@ -40,9 +38,10 @@ public final class MandrillRequest<OUT> implements RequestModel<OUT> {
 		return url;
 	}
 
-	public HttpRequestBase getRequest() throws IOException {
-		final String paramsStr = LutungGsonUtils.getGson().toJson(
-				requestParams, requestParams.getClass());
+	public HttpRequestBase getRequest() {
+		final String paramsStr = LutungGsonUtils
+			.getGson()
+			.toJson(requestParams, requestParams.getClass());
         log.debug("raw content for request:\n" +paramsStr);
 		final StringEntity entity = new StringEntity(paramsStr, "UTF-8");
 		entity.setContentType("application/json");
@@ -58,17 +57,13 @@ public final class MandrillRequest<OUT> implements RequestModel<OUT> {
 
 	public OUT handleResponse(final String responseString)
 			throws HandleResponseException {
-
 		try {
-            log.debug("raw content from response:\n" +responseString);
-			return LutungGsonUtils.getGson().fromJson(
-					responseString, responseContentType);
-
+            log.debug("raw content from response: {}", responseString);
+			return LutungGsonUtils.getGson().fromJson(responseString, responseContentType);
 		} catch(final Throwable t) {
 			String msg = "Error handling Mandrill response " +
-					((responseString != null)?": '"+responseString+"'" : "");
+				((responseString != null) ? ": '" + responseString + "'" : "");
 			throw new HandleResponseException(msg, t);
-
 		}
 	}
 
