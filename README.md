@@ -29,7 +29,7 @@ If you're using Maven, just add this [dependency](https://search.maven.org/searc
 <dependency>
     <groupId>io.github.dnovitski</groupId>
     <artifactId>lutung</artifactId>
-    <version>0.0.12</version>
+    <version>0.0.13</version>
 </dependency>
 ```
 If you're not using Maven, see [Dependencies](#dependencies) below.
@@ -141,6 +141,12 @@ License
 -------
 This library is released under the GNU Lesser General Public 
 License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl.html).
+
+Release 0.0.13 - Release Notes
+-------
+* Bumped dependency versions of everything to more recent versions
+* Removed wrapper around commons logger
+* Clean up
 
 Release 0.0.12 - Release Notes
 -------

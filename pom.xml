@@ -4,7 +4,7 @@
 
     <groupId>io.github.dnovitski</groupId>
     <artifactId>lutung</artifactId>
-    <version>0.0.12</version>
+    <version>0.0.13</version>
     <name>lutung</name>
     <description>Mandrill API Client for Java</description>
     <url>https://github.com/rschreijer/lutung</url>
