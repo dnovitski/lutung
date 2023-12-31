@@ -13,12 +13,13 @@ import java.util.Map;
  */
 public class MandrillMessageInfo {
     private Long ts;
-	private Integer opens, clicks;
-	private String _id, sender, template, subject, email, state;
+	private Integer opens, clicks, bgtools_code;
+	private String _id, sender, template, subject, email, state, diag;
 	private List<String> tags;
 	private List<UserActionDetail> opens_detail, clicks_detail;
 	private List<SMTPEvent> smtp_events;
 	private Map<String,String> metadata;
+	private MandrillRejectsEntry reject;
 
 	/**
 	 * @return The Unix timestamp from when this message was sent.
@@ -100,6 +101,18 @@ public class MandrillMessageInfo {
 	 */
 	public Map<String,String> getMetadata() {
 		return metadata;
+	}
+
+	public Integer getBgtoolsCode() {
+		return bgtools_code;
+	}
+
+	public String getDiag() {
+		return diag;
+	}
+
+	public MandrillRejectsEntry getReject() {
+		return reject;
 	}
 
 	public static class UserActionDetail {
