@@ -29,7 +29,7 @@ If you're using Maven, just add this [dependency](https://search.maven.org/searc
 <dependency>
     <groupId>io.github.dnovitski</groupId>
     <artifactId>lutung</artifactId>
-    <version>0.0.13</version>
+    <version>0.0.14</version>
 </dependency>
 ```
 If you're not using Maven, see [Dependencies](#dependencies) below.
@@ -141,6 +141,10 @@ License
 -------
 This library is released under the GNU Lesser General Public 
 License [http://www.gnu.org/licenses/lgpl.html](http://www.gnu.org/licenses/lgpl.html).
+
+Release 0.0.14 - Release Notes
+-------
+* Updated to httpclient5
 
 Release 0.0.13 - Release Notes
 -------
