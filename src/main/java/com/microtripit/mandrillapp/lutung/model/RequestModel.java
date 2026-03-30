@@ -5,7 +5,7 @@ package com.microtripit.mandrillapp.lutung.model;
 
 import java.io.IOException;
 
-import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.hc.core5.http.ClassicHttpRequest;
 
 /**
  *
@@ -22,11 +22,11 @@ public interface RequestModel<V> {
 
 	/**
 	 * @return The request object describing the request to
-	 * be made w/ a http client.
+	 * be made w/ an http client.
 	 * @throws IOException IO Error
 	 * @since Mar 22, 2013
 	 */
-	HttpRequestBase getRequest() throws IOException;
+	ClassicHttpRequest getRequest() throws IOException;
 
 	/**
 	 * <p>Checks weather the response-status is as-expected
@@ -40,9 +40,9 @@ public interface RequestModel<V> {
 	/**
 	 * <p>Parses the content/data of this request's response into
 	 * a desired format {@link V}.
-	 * @param responseString
-	 * @return
-	 * @throws HandleResponseException
+	 * @param responseString The response as a string
+	 * @return The response
+	 * @throws HandleResponseException If an error occurs parsing the response.
 	 */
 	V handleResponse(String responseString) throws HandleResponseException;
 

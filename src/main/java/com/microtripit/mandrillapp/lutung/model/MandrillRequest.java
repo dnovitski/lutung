@@ -3,10 +3,12 @@
  */
 package com.microtripit.mandrillapp.lutung.model;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.entity.StringEntity;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.core5.http.ClassicHttpRequest;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 
 import java.util.Map;
 
@@ -17,12 +19,13 @@ import java.util.Map;
 @Slf4j
 public final class MandrillRequest<OUT> implements RequestModel<OUT> {
 
+	@Getter
 	private final String url;
 	private final Class<OUT> responseContentType;
-	private final Map<String,? extends Object> requestParams;
+	private final Map<String, ?> requestParams;
 
 	public MandrillRequest( final String url,
-			final Map<String,? extends Object> params,
+			final Map<String, ?> params,
 			final Class<OUT> responseType ) {
 
 		if(responseType == null) {
@@ -34,17 +37,12 @@ public final class MandrillRequest<OUT> implements RequestModel<OUT> {
 		this.responseContentType = responseType;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public HttpRequestBase getRequest() {
+	public ClassicHttpRequest getRequest() {
 		final String paramsStr = LutungGsonUtils
 			.getGson()
 			.toJson(requestParams, requestParams.getClass());
-        log.debug("raw content for request:\n" +paramsStr);
-		final StringEntity entity = new StringEntity(paramsStr, "UTF-8");
-		entity.setContentType("application/json");
+        log.debug("raw content for request:\n {}", paramsStr);
+		final StringEntity entity = new StringEntity(paramsStr, ContentType.APPLICATION_JSON);
 		final HttpPost request = new HttpPost(url);
 		request.setEntity(entity);
 		return request;

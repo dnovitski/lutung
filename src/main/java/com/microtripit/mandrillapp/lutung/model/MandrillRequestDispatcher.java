@@ -5,15 +5,17 @@ package com.microtripit.mandrillapp.lutung.model;
 
 import com.microtripit.mandrillapp.lutung.model.MandrillApiError.MandrillError;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.config.SocketConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.SocketConfig;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.util.TimeValue;
+import org.apache.hc.core5.util.Timeout;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -30,7 +32,7 @@ import java.util.List;
 public final class MandrillRequestDispatcher {
 
 	/**
-	 * See https://hc.apache.org/httpcomponents-core-4.3.x/httpcore/apidocs/org/apache/http/params/HttpConnectionParams.html#setSoTimeout(org.apache.http.params.HttpParams, int)
+	 * See https://hc.apache.org/httpcomponents-core-5.3.x/current/httpcore5/apidocs/org/apache/hc/core5/http/config/SocketConfig.Builder.html#setSoTimeout(org.apache.hc.core5.util.Timeout)
 	 *
 	 * A value of 0 means no timeout at all.
 	 * The value is expressed in milliseconds.
@@ -39,7 +41,7 @@ public final class MandrillRequestDispatcher {
 	public static String SOCKET_TIMEOUT_MILLIS_DEFAULT = "5000";
 
 	/**
-	 * See https://hc.apache.org/httpcomponents-core-4.3.x/httpcore/apidocs/org/apache/http/params/HttpConnectionParams.html#setConnectionTimeout(org.apache.http.params.HttpParams, int)
+	 * See https://hc.apache.org/httpcomponents-client-5.3.x/current/httpclient5/apidocs/org/apache/hc/client5/http/config/RequestConfig.Builder.html#setConnectTimeout(org.apache.hc.core5.util.Timeout)
 	 *
 	 * A value of 0 means no timeout at all.
 	 * The value is expressed in milliseconds.
@@ -51,8 +53,8 @@ public final class MandrillRequestDispatcher {
 	public static String LINGER_TIMEOUT_MILLIS_DEFAULT = "0";
 
 	private static CloseableHttpClient httpClient;
-	private static PoolingHttpClientConnectionManager connexionManager;
-	private static RequestConfig defaultRequestConfig;
+	private static final PoolingHttpClientConnectionManager connexionManager;
+	private static final RequestConfig defaultRequestConfig;
 
 	private static int getSystemProperty(String name, String defaultValue) {
 		String value = System.getProperty(name, defaultValue);
@@ -62,14 +64,14 @@ public final class MandrillRequestDispatcher {
 	static {
 		connexionManager = new PoolingHttpClientConnectionManager();
 		connexionManager.setDefaultSocketConfig(SocketConfig.copy(SocketConfig.DEFAULT)
-				.setSoLinger(getSystemProperty(LINGER_TIMEOUT_MILLIS, LINGER_TIMEOUT_MILLIS_DEFAULT))
-				.setSoTimeout(getSystemProperty(SOCKET_TIMEOUT_MILLIS, SOCKET_TIMEOUT_MILLIS_DEFAULT))
+				.setSoLinger(TimeValue.ofMilliseconds(getSystemProperty(LINGER_TIMEOUT_MILLIS, LINGER_TIMEOUT_MILLIS_DEFAULT)))
+				.setSoTimeout(Timeout.ofMilliseconds(getSystemProperty(SOCKET_TIMEOUT_MILLIS, SOCKET_TIMEOUT_MILLIS_DEFAULT)))
 				.build());
 		connexionManager.setDefaultMaxPerRoute(50);
 		defaultRequestConfig = RequestConfig.custom()
-				.setSocketTimeout(getSystemProperty(SOCKET_TIMEOUT_MILLIS, SOCKET_TIMEOUT_MILLIS_DEFAULT))
-				.setConnectTimeout(getSystemProperty(CONNECTION_TIMEOUT_MILLIS, CONNECTION_TIMEOUT_MILLIS_DEFAULT))
-				.setConnectionRequestTimeout(getSystemProperty(CONNECTION_TIMEOUT_MILLIS, CONNECTION_TIMEOUT_MILLIS_DEFAULT)).build();
+				.setResponseTimeout(Timeout.ofMilliseconds(getSystemProperty(SOCKET_TIMEOUT_MILLIS, SOCKET_TIMEOUT_MILLIS_DEFAULT)))
+				.setConnectTimeout(Timeout.ofMilliseconds(getSystemProperty(CONNECTION_TIMEOUT_MILLIS, CONNECTION_TIMEOUT_MILLIS_DEFAULT)))
+				.setConnectionRequestTimeout(Timeout.ofMilliseconds(getSystemProperty(CONNECTION_TIMEOUT_MILLIS, CONNECTION_TIMEOUT_MILLIS_DEFAULT))).build();
 		httpClient = HttpClients.custom().setUserAgent("/Lutung-0.1")
 				.setDefaultRequestConfig(defaultRequestConfig)
 				.setConnectionManager(connexionManager).useSystemProperties()
@@ -78,7 +80,6 @@ public final class MandrillRequestDispatcher {
 
 	public static <T> T execute(final RequestModel<T> requestModel) throws MandrillApiError, IOException {
 
-		HttpResponse response = null;
 		String responseString = null;
 		try {
 			// use proxy?
@@ -95,13 +96,13 @@ public final class MandrillRequestDispatcher {
 						.setConnectionManager(connexionManager).useSystemProperties()
 						.build();
 			}
-            log.debug("starting request '{}'", requestModel.getUrl());
-			response = httpClient.execute( requestModel.getRequest() );
-			final StatusLine status = response.getStatusLine();
-			responseString = EntityUtils.toString(response.getEntity());
-			if( requestModel.validateResponseStatus(status.getStatusCode()) ) {
+			log.debug("starting request '{}'", requestModel.getUrl());
+			try (CloseableHttpResponse response = httpClient.execute(requestModel.getRequest())) {
+				final int statusCode = response.getCode();
+				responseString = EntityUtils.toString(response.getEntity());
+				if( requestModel.validateResponseStatus(statusCode) ) {
 				try {
-					return requestModel.handleResponse( responseString );
+					return requestModel.handleResponse(responseString);
 
 				} catch(final HandleResponseException e) {
 					throw new IOException(
@@ -110,35 +111,28 @@ public final class MandrillRequestDispatcher {
 
 				}
 
-			} else {
-				// ==> compile mandrill error!
-				MandrillError error = null;
-				try {
-				    error = LutungGsonUtils.getGson()
-						.fromJson(responseString, MandrillError.class);
-				} catch (Throwable ex) {
-				    error = new MandrillError("Invalid Error Format",
-				                              "Invalid Error Format",
-				                              responseString,
-				                              status.getStatusCode());
+				} else {
+					// ==> compile mandrill error!
+					MandrillError error;
+					try {
+					    error = LutungGsonUtils.getGson()
+							.fromJson(responseString, MandrillError.class);
+					} catch (Throwable ex) {
+					    error = new MandrillError("Invalid Error Format",
+					                              "Invalid Error Format",
+					                              responseString,
+					                              statusCode);
+					}
+
+					throw new MandrillApiError(
+							"Unexpected http status in response: "
+							+statusCode+ " ("
+							+response.getReasonPhrase()+ ")").withError(error);
+
 				}
-
-				throw new MandrillApiError(
-						"Unexpected http status in response: "
-						+status.getStatusCode()+ " ("
-						+status.getReasonPhrase()+ ")").withError(error);
-
 			}
-
-		} finally {
-			try {
-				if (response != null) {
-					EntityUtils.consume(response.getEntity());
-				}
-			} catch (IOException e) {
-				log.error("Error consuming entity", e);
-				throw e;
-			}
+		} catch (ParseException e) {
+			throw new IOException("Unable to parse HTTP response for request '" + requestModel.getUrl() + "'", e);
 		}
 	}
 
